@@ -1,4 +1,4 @@
-//alert('Press [Enter] to pause or start\nUse the arrow keys to maneuver')
+alert('Press [Enter] to pause or start\nUse the arrow keys to maneuver')
 const game = {
     pause : false,
     gameOver : false,
