@@ -1,0 +1,101 @@
+body {
+    background: rgb(43,8,51);
+}
+.upperSection {
+    margin: auto;
+    height: 600px;
+    /* width: auto; */
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+.panel {
+    /* background-color: #5bf646; */
+    height: 600px;
+    width: 100px;
+}
+.panel_controlElement {
+    width: 100px;
+    height: fit-content;
+    border: 1px solid rgb(194, 0, 184);
+}
+.button {
+    user-select: none;
+    background: #000000;
+    border: 1px solid rgb(194, 0, 184);
+    color:rgb(194, 0, 184);
+    font-family: Arcade;
+    text-align: center;
+    font-size: 25px;
+    width: auto;
+    height: 26px;
+}
+.pressedButton {
+    color:rgb(245, 130, 239)
+}
+
+.pen {
+    position: relative;
+    /* margin: auto; */
+    width: 600px;
+    height: 600px;
+    background: #000000;
+    border: 1px solid rgb(194, 0, 184);
+}
+.square {
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    /* background: rgb(194, 0, 184); */
+    /* border: 1px solid #ffffff; */
+}
+.first {
+    background:#5bf646;
+    /* z-index: 2; */
+}
+#food {
+    background: rgb(245, 130, 239);
+    /* color: rgb(194, 0, 184); */
+}
+.control {
+    position: relative;
+    margin:auto;
+    margin-top: 5px;
+    width: 600px;
+    height: 230px;
+    background: #000000;
+    padding-top: 0px;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
+    border: 1px solid #000000;
+}
+.bar {
+    width: 600px;
+    height: 30px;
+    background: #000000;
+}
+#fill {
+    width: 0px;
+    height: 30px;
+    background: rgb(194, 0, 184);
+}
+.numbers, .descriptions {
+    
+    width: 600px;
+    height: 100px;
+    /* background: olivedrab; */
+    color: #cc00ff;
+    font-family: Arcade;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.counter, .text{
+    /* border: 1px solid black; */
+    text-align: center;
+    height: auto;
+    width: 300px;
+    font-size: 95px;
+}

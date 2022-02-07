@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Super Nibbler</title>
+    <link rel="stylesheet" href="style.css">
+    <style media="screen">
+        @font-face {
+          font-family: "Arcade";
+          src: url("fonts/Arcade.ttf");
+        }
+    </style>
+</head>
+<body onload="game.newGame()">
+    <div class="upperSection">
+        <div class="panel" id="leftPanel">
+            <div class="panel_controlElement" id="difficultySetting">
+                <div class="button" id='normal' onclick="game.setDifficulty('normal')   ">Adult</div>
+                <div class="button" id='baby'   onclick="game.setDifficulty('baby')     ">Juvenile</div>
+                <div class="button" id='dont'   onclick="game.setDifficulty('dont')     ">Hatchling</div>
+            </div>
+        </div>
+        <div class="pen"></div>
+        <div class="panel" id="rightPanel"></div>
+    </div>
+    <div class="lowerSection">
+        <div class="control">
+            <div class="bar" id="bonusTime">
+                    <div id="fill"></div>
+            </div>
+            <div class="numbers">
+                <div class="counter" id="multiplier"></div>
+                <div class="counter" id="score"></div>
+            </div>
+            <div class="descriptions">
+                <div class="text">Bonus</div>
+                <div class="text">Score</div>
+            </div>
+        </div>
+    </div>
+   
+    <script src="main.js"></script>
+    <script src="controls.js"></script>
+    <script src="render.js"></script>
+    <script src="wurm.js"></script>
+    <script src="food.js"></script>
+    <script src="colors.js"></script>
+    <script src="sounds.js"></script>
+</body>
+</html>
