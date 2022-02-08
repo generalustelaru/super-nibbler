@@ -35,33 +35,27 @@ window.addEventListener('keydown', (e) => { // track arrow keypresses
     }
 })
 
-const commands = { // queues up non-backtracking commands
-    queue : [],
-    course : 'right',
+const commands = { // manages commands
+    auto : 'right',
+    current : '',
     feedNext : function() {
-        if (this.queue.length == 0) {
-            this.queue.push(this.course)
-        } else {
-            this.course = this.queue.shift()
+        if (this.current == '') {
+            this.current = this.auto
         }
-        return this.course
+        const command = this.current 
+        this.auto = command
+        this.current = ''
+        return command
     },
     reportLastCommand : function() {
-        if (this.queue.length > 0) {
-            return this.queue[this.queue.length - 1]    
-        }
-        return this.course
+        return this.auto
     },
     recordCommand : function(command) {
-        if (this.queue[this.queue.length - 1] != command) {
-            this.queue.push(command)    
-        }
+        this.current = command
     },
     clearCommands : function() {
-        while (this.queue.length > 0) {
-            this.queue.pop()
-        }
-        this.course = 'right'
+        this.current = ''
+        this.auto = 'right'
     }
 }
 
