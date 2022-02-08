@@ -1,8 +1,8 @@
-alert('Press [Enter] to pause or start\nUse the arrow keys to maneuver')
+//alert('Press [Enter] to pause or start\nUse the arrow keys to maneuver')
 const game = {
-    pause : false,
-    gameOver : false,
-    difficulty : 'baby',
+    pause : true,
+    gameOver : true,
+    difficulty : 'easy',
     frameAt : 150,
     setDifficulty(level) {
         if (this.isRunning()) {
@@ -10,15 +10,15 @@ const game = {
         }   
         document.querySelector('.pen').click();
         switch (level) {
-            case 'dont':
+            case 'larva':
                 this.frameAt = 300
-                difficultyControls.switchDifficulty(this.difficulty, 'dont')
-                this.difficulty = 'dont'
+                difficultyControls.switchDifficulty(this.difficulty, 'larva')
+                this.difficulty = 'larva'
                 break;
-            case 'baby':
+            case 'easy':
                 this.frameAt = 150
-                difficultyControls.switchDifficulty(this.difficulty,'baby')
-                this.difficulty = 'baby'
+                difficultyControls.switchDifficulty(this.difficulty,'easy')
+                this.difficulty = 'easy'
                 break;
             case 'normal':
                 this.frameAt = 75

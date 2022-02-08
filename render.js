@@ -1,3 +1,11 @@
+const modal = {
+    isVisible : true,
+    dismiss : function() {
+        this.isVisible = false
+        document.querySelector('.modal').style.visibility = 'hidden'
+    }
+}
+
 const pen  = {
     bgColor : '',
     setColor : function() {
