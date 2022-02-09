@@ -1,8 +1,27 @@
-const modal = {
-    isVisible : true,
+const instructionsModal = {
+    isVisible : false,
+    display : function() {
+        this.isVisible = true
+        document.querySelector('#instructions').style.visibility = 'visible'
+    },
     dismiss : function() {
         this.isVisible = false
-        document.querySelector('.modal').style.visibility = 'hidden'
+        document.querySelector('#instructions').style.visibility = 'hidden'
+        if (game.pause) {
+            pauseModal.display()
+        }
+    }
+}
+
+const pauseModal = {
+    isVisible : false,
+    dismiss : function() {
+        this.isVisible = false
+        document.querySelector('#pause').style.visibility = 'hidden'
+    },
+    display : function() {
+        this.isVisible = true
+        document.querySelector('#pause').style.visibility = 'visible'
     }
 }
 

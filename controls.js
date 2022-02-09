@@ -25,8 +25,8 @@ window.addEventListener('keydown', (e) => { // track arrow keypresses
             if (game.isRunning()) {
                 game.pauseGame()
             } else if (game.isOver()){
-                if (modal.isVisible) {
-                    modal.dismiss()
+                if (instructionsModal.isVisible) {
+                    instructionsModal.dismiss()
                 }
                 game.newGame()
             } else {

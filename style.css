@@ -2,12 +2,13 @@ body {
     background: rgb(43,8,51);
 }
 .modal {
+    box-sizing: border-box;
     position: absolute;
-    visibility: visible; /* hidden | visible */
+    visibility: hidden; /* hidden | visible */
     z-index: 1;
-    height: 300px;
+    height: 599px;
     width: 600px;
-    top: 20px;
+    top: 10px;
     left: 50%;
     transform: translate( -50%);
     background: #000000;
@@ -16,6 +17,14 @@ body {
     font-family: Arcade;
     font-size: 50px;
 
+}
+#pause {
+    padding-top: 270px;
+    background:#000000;
+    opacity: 50%;
+}
+.highlightedText {
+    color: #ffffff;
 }
 .upperSection {
     margin: auto;
