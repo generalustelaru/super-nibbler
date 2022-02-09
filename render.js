@@ -129,3 +129,13 @@ const difficultyControls = {
         document.querySelector('#' + neu).className = 'button pressedButton'
     }
 }
+const soundDisplay = {
+    toggle : function(setting) {
+        if (setting == false) {
+            document.querySelector('#sound').className = 'button'    
+        } else {
+            document.querySelector('#sound').className = 'button pressedButton'
+        }
+        
+    }
+}
