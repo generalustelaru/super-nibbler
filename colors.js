@@ -8,10 +8,10 @@ const colorPalette = {
     anchorValue : '',
     isNewColor : false,
     isConfigured : false,
-    step : 50,
+    step : 1,
     setStep : function(segments) {
         //console.log(segments)
-        //this.step = (segments - 3)
+        this.step = (255 / segments) * scoreBox.multiplier
     },
     rollConfiguration : function () {
         const set = ['rgb','rbg','grb','gbr','brg','bgr']
@@ -22,6 +22,7 @@ const colorPalette = {
         //scoreBox.updateMultiplier('+')
         this.isConfigured = true
         this.anchorValue = Math.round(Math.random() * 255)
+        //this.anchorValue = 0
         const config = this.nextConfiguration
         switch (config) {
             case 'rgb':
