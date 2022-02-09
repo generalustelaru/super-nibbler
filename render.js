@@ -139,7 +139,7 @@ const scoreBox = {
         const scoreCounter = document.querySelector('#score')
         scoreCounter.innerText = this.score
         const scoreMultiplier = document.querySelector('#multiplier')
-        scoreMultiplier.innerText = 'X' + this.multiplier
+        scoreMultiplier.innerText = 'x' + this.multiplier
     }
 }
 const difficultyControls = {

@@ -9,7 +9,7 @@ const wormFood = {
     addFood : function() {
         //pen.setColor()
         this.count += 1
-        if (bonusBar.getIsActive()) {
+        if (bonusBar.isActive) {
             bonusBar.fillBar()
         }
         //console.log(this.count)
