@@ -36,7 +36,7 @@ const game = {
         scoreBox.resetScore()
         colorPalette.resetColors()
         colorPalette.rollConfiguration()
-        pauseModal.dismiss()
+        modal.dismiss()
         //wormFood.addFood()
         wormFood.resetFood()
         commands.clearCommands()
@@ -47,16 +47,17 @@ const game = {
     },
     resumeGame : function() {
         this.pause = false
-        pauseModal.dismiss()
+        modal.dismiss()
         run(this.frameAt)
     },
     pauseGame : function() {
         this.pause = true
-        pauseModal.display()
+        modal.display('pause')
     },
     endGame : function() {
         this.pause = true
         this.gameOver = true
+        modal.display('gameOver')
         //alert('SCORE: '+(wormFood.getCount() - 1))
     },
     isRunning : function() {

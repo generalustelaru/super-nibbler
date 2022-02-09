@@ -18,9 +18,8 @@ body {
     font-size: 50px;
 
 }
-#pause {
+.stopped {
     padding-top: 270px;
-    background:#000000;
     opacity: 50%;
 }
 .highlightedText {

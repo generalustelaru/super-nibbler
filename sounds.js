@@ -1,7 +1,9 @@
 const sounds = {
     sounds : false,
     toggleSound : function() {
-        game.pauseGame()
+        if (game.isRunning()) {
+            game.pauseGame()
+        }
         if (this.sounds) {
             this.sounds = false
         } else {

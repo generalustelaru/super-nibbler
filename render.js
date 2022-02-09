@@ -1,28 +1,37 @@
-const instructionsModal = {
+const modal = {
     isVisible : false,
-    display : function() {
-        this.isVisible = true
-        document.querySelector('#instructions').style.visibility = 'visible'
-    },
+    introText: 'Select a difficulty.<br><span class="highlightedText">Arrow keys</span> to maneuver.<br><span class="highlightedText">[Enter]</span> to Start/Pause.<br>\'Special treat\'<br>every 10th chow.<br><div class="button" onclick="modal.dismiss()">OKAY</div>',
+    pauseText: 'Paused',
+    gameOverText: 'Game Over',
     dismiss : function() {
         this.isVisible = false
-        document.querySelector('#instructions').style.visibility = 'hidden'
-        if (game.pause) {
-            pauseModal.display()
+        document.querySelector('.modal').style.visibility = 'hidden'
+    },
+    display : function(message) {
+        this.isVisible = true
+        let element = document.querySelector('.modal')
+        if (message != 'intro') {
+            element.className = 'modal stopped'
+        } else {
+            element.className = 'modal'
         }
-    }
-}
-
-const pauseModal = {
-    isVisible : false,
-    dismiss : function() {
-        this.isVisible = false
-        document.querySelector('#pause').style.visibility = 'hidden'
+        let contents = ''
+        switch (message) {
+            case 'intro':
+                contents = this.introText
+                break
+            case 'pause':
+                contents = this.pauseText
+                break
+            case 'gameOver':
+                contents = this.gameOverText
+                break
+            default:
+                break
+        }
+        element.innerHTML = contents
+        element.style.visibility = 'visible'
     },
-    display : function() {
-        this.isVisible = true
-        document.querySelector('#pause').style.visibility = 'visible'
-    }
 }
 
 const pen  = {
