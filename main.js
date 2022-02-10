@@ -32,6 +32,7 @@ const game = {
     newGame : function() {
         this.setDifficulty(this.difficulty)
         this.gameOver = false
+        sounds.playAmbience()
         bonusBar.depleteBar()
         scoreBox.resetScore()
         colorPalette.resetColors()
@@ -47,15 +48,20 @@ const game = {
     },
     resumeGame : function() {
         this.pause = false
+        if (sounds.isSound) {
+            sounds.ambience.play()    
+        }
         modal.dismiss()
         run(this.frameAt)
     },
     pauseGame : function() {
         this.pause = true
         modal.display('pause')
+        sounds.ambience.pause()
     },
     endGame : function() {
         this.pause = true
+        sounds.stopAmbience()
         this.gameOver = true
         modal.display('gameOver')
         //alert('SCORE: '+(wormFood.getCount() - 1))

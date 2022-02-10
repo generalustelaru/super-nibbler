@@ -1,6 +1,6 @@
 const sounds = {
-    sounds : true,
-    mode : 'discreet',
+    isSound : false,
+    mode : 'mute',
     volume : 0.1,
     setSound : function(newMode) {
         if (game.isRunning()) {
@@ -8,19 +8,33 @@ const sounds = {
         }
         switch (newMode) {
             case 'mute':
-                this.sounds = false
+                this.isSound = false
+                this.ambience.pause()
                 break
             case 'discreet':
-                this.sounds = true
+                this.isSound = true
                 this.volume = 0.1
+                this.ambience.volume = this.volume
                 break
             case 'loud':
-                this.sounds = true
+                this.isSound = true
                 this.volume = 0.5
+                this.ambience.volume = this.volume
                 break
         }
         soundDisplay.showVolume(this.mode, newMode)
         this.mode = newMode
+    },
+    ambience : new Audio('sounds/Xylo-Ziko - Subterranean.mp3'),
+    playAmbience : function(){
+        if (this.isSound) {
+            this.ambience.play()
+        }
+    },
+    stopAmbience : function() {
+        this.ambience.pause()
+        this.ambience.src = 'sounds/Xylo-Ziko - Subterranean.mp3'
+        this.ambience.loop = true
     },
     bonus : new Audio('sounds/bonusFood.wav'),
     bump : new Audio('sounds/bump.wav'),
@@ -28,14 +42,14 @@ const sounds = {
     xFood : new Audio('sounds/xFood.wav'),
     bonusLost : new Audio('sounds/bonusLost.wav'),
     play : function(sound) {
-        if (this.sounds) {
+        if (this.isSound) {
             switch (sound) {
                 case 'food':
                     this.food.volume = this.volume
                     this.food.play()
                     break
                 case 'bump':
-                    this.bump.volume = this.volume
+                    this.bump.volume = this.volume + 0.3
                     this.bump.play()
                     break
                 case 'xFood':

@@ -1,6 +1,9 @@
 body {
     background: rgb(43,8,51);
 }
+a {
+    color: rgb(245, 130, 239);
+}
 .modal {
     box-sizing: border-box;
     position: absolute;

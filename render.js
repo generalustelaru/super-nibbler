@@ -1,31 +1,40 @@
 const modal = {
     isVisible : false,
-    introText: '&lt;&lt; Difficulty Sound &gt;&gt;<br><span class="highlightedText">Arrow keys</span> to maneuver.<br><span class="highlightedText">[Enter]</span> to Start/Pause.<br>\'Special treat\'<br>every 10th chow.<br><div class="button" onclick="modal.dismiss()">OKAY</div>',
+    introText: '&lt;&lt; Difficulty Sound &gt;&gt;<br><span class="highlightedText">Arrow keys</span> to maneuver.<br><span class="highlightedText">[Enter]</span> to Start/Pause.<br>\'Special treat\'<br>every 10th chow.<br><div class="button" onclick="modal.display(\'license\')">OKAY</div>',
     pauseText: 'Paused',
     gameOverText: 'Game Over',
+    licenseText: 'This game uses sounds and music licensed under Creative Commons<br>Sound Effects:<br><a href="https://freesound.org/people/LittleRobotSoundFactory/" target="_blank">LittleRobotSoundFactory</a><br>Music:<br><a href="https://freemusicarchive.org/music/Xylo-Ziko" target="_blank">Xylo-Ziko-Subterranean</a><br><div class="button" onclick="modal.display(\'cta\')">OKAY</div>',
+    ctaText: 'Press Enter',
     dismiss : function() {
         this.isVisible = false
+        console.log('dismiss')
         document.querySelector('.modal').style.visibility = 'hidden'
     },
     display : function(message) {
         this.isVisible = true
         let element = document.querySelector('.modal')
-        if (message != 'intro') {
+        if (message != 'intro' && message != 'license') {
             element.className = 'modal stopped'
         } else {
             element.className = 'modal'
         }
         let contents = ''
         switch (message) {
-            case 'intro':
-                contents = this.introText
-                break
             case 'pause':
                 contents = this.pauseText
                 break
             case 'gameOver':
                 contents = this.gameOverText
                 break
+            case 'intro':
+                contents = this.introText
+                break
+            case 'license':
+                contents = this.licenseText
+                break
+            case 'cta':
+                contents = this.ctaText
+                break            
             default:
                 break
         }
