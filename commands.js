@@ -22,7 +22,6 @@ window.addEventListener('keydown', (e) => { // track arrow keypresses
             }
             break;
         case 'Enter':
-            console.log('Enter!')
             if (game.isRunning()) {
                 game.pauseGame()
             } else if (game.isOver()){

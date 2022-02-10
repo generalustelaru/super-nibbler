@@ -7,7 +7,6 @@ const modal = {
     ctaText: 'Press Enter',
     dismiss : function() {
         this.isVisible = false
-        console.log('dismiss')
         document.querySelector('.modal').style.visibility = 'hidden'
     },
     display : function(message) {
@@ -57,15 +56,10 @@ function displaySquare(object) {
     if (square.id == 'food') {
         square.className = 'square food'
         if (object.count % 10 == 0) {
-            square.style.backgroundColor = colorPalette.getFoodColor()            
-            //scoreBox.updateMultiplier('+')
-            //colorPalette.prepareConfiguration()
+            square.style.backgroundColor = colorPalette.getFoodColor()
         }
-        //colorPalette.setConfiguration()
     } else {
         square.className = 'square'
-        //const debug = colorPalette.getColor()
-        //console.log('render/displaySquare/getColor(): '+debug)
         square.style.backgroundColor = colorPalette.getColor()
     }
     square.style.top = object.top + 'px'
@@ -77,7 +71,6 @@ function displaySquare(object) {
 function clearSquare(object) {
     const pen = document.querySelector('.pen')
     const toClear = document.getElementById(object.id + '')
-    //console.log(toClear)
     pen.removeChild(toClear)
 }
 
@@ -96,7 +89,6 @@ const bonusBar = {
     fillBar : function() {
         this.isActive = true
         this.fill = 100
-        //console.log('Fill: '+this.fill)
         this.updateDisplay()
     },
     reduceBar : function() {
@@ -113,11 +105,10 @@ const bonusBar = {
         }
         this.updateDisplay()
     },
-    setUnit : function(newValue) { //unused
+    setUnit : function(newValue) { //TODO: Implement adaptable bonusBar
         this.unit = newValue
     },
     updateDisplay : function() {
-        //document.getElementById('fill').style.width = ((this.fill * 6) + 'px')
         document.getElementById('fill').style.width = ((this.fill * 6) + 'px')
     }
 }
@@ -142,7 +133,6 @@ const scoreBox = {
         this.score = 0
         this.multiplier = 1
         this.displayScore()
-        //this.updateMultiplier()
     },
     bumpScore : function() {
         this.score += this.multiplier

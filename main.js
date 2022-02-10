@@ -1,4 +1,3 @@
-//alert('Press [Enter] to pause or start\nUse the arrow keys to maneuver')
 const game = {
     pause : true,
     gameOver : true,
@@ -32,17 +31,16 @@ const game = {
     newGame : function() {
         this.setDifficulty(this.difficulty)
         this.gameOver = false
+        wurm.removeWurm()
+        wurm.spawnWurm()
         sounds.playAmbience()
         bonusBar.depleteBar()
         scoreBox.resetScore()
         colorPalette.resetColors()
         colorPalette.rollConfiguration()
         modal.dismiss()
-        //wormFood.addFood()
         wormFood.resetFood()
         commands.clearCommands()
-        wurm.removeWurm()
-        wurm.spawnWurm()
         this.pause = false
         run(this.frameAt)
     },
@@ -64,7 +62,6 @@ const game = {
         sounds.stopAmbience()
         this.gameOver = true
         modal.display('gameOver')
-        //alert('SCORE: '+(wormFood.getCount() - 1))
     },
     isRunning : function() {
         return (this.pause ? false : true)
