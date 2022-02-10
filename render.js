@@ -75,7 +75,7 @@ function clearSquare(object) {
 }
 
 const bonusBar = {
-    fill : 0,
+    fill : 600,
     unit : 2,
     isActive : false,
     getIsActive : function(){
@@ -88,7 +88,7 @@ const bonusBar = {
     },
     fillBar : function() {
         this.isActive = true
-        this.fill = 100
+        this.fill = 600
         this.updateDisplay()
     },
     reduceBar : function() {
@@ -101,15 +101,11 @@ const bonusBar = {
                 colorPalette.rollConfiguration()
                 scoreBox.updateMultiplier() 
             }
-            
         }
         this.updateDisplay()
     },
-    setUnit : function(newValue) { //TODO: Implement adaptable bonusBar
-        this.unit = newValue
-    },
     updateDisplay : function() {
-        document.getElementById('fill').style.width = ((this.fill * 6) + 'px')
+        document.getElementById('fill').style.width = (this.fill + 'px')
     }
 }
 
@@ -119,7 +115,7 @@ const scoreBox = {
     updateMultiplier : function(string) {
         switch (string) {
             case '+':
-                this.multiplier *= 2
+                this.multiplier += 1
                 sounds.play('bonus')
                 break;        
             default:
@@ -150,12 +146,14 @@ const scoreBox = {
         scoreMultiplier.innerText = 'x' + this.multiplier
     }
 }
+
 const difficultyControls = {
     switchDifficulty : function(old, neu) {
         document.querySelector('#' + old).className = 'button'
         document.querySelector('#' + neu).className = 'button pressedButton'
     }
 }
+
 const soundDisplay = {
     showVolume : function(oldMode, newMode) {
         document.querySelector('#' + oldMode).className = 'button'

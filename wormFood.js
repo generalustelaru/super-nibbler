@@ -8,10 +8,6 @@ const wormFood = {
     },
     addFood : function() {
         this.count += 1
-        if (bonusBar.isActive) { // Maintain bonus streak for the previously eaten food
-            bonusBar.fillBar()
-        }
-        // second fillBar() call was here
         if (this.top != -1) { // Provison for clearing food left from previous session
             clearSquare({id : this.id})
         }
