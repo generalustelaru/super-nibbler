@@ -94,6 +94,9 @@ function run(frameAt) {
             } else {
                 wurm.displaySegment()
             }
+            if (!document.hasFocus()) {
+                game.pauseGame()
+            }
         } else {
             clearInterval(interval)
         }
