@@ -28,13 +28,13 @@ const sounds = {
     ambience : new Audio('sounds/Xylo-Ziko - Subterranean.mp3'),
     playAmbience : function(){
         if (this.isSound) {
+            this.ambience.loop = true
             this.ambience.play()
         }
     },
     stopAmbience : function() {
         this.ambience.pause()
         this.ambience.src = 'sounds/Xylo-Ziko - Subterranean.mp3'
-        this.ambience.loop = true
     },
     bonus : new Audio('sounds/bonusFood.wav'),
     bump : new Audio('sounds/bump.wav'),

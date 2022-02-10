@@ -31,7 +31,7 @@ const wormFood = {
             ///////////////// Avoid placement too close to the head
             const head = wurm.getHead()
             const distance = (Math.abs(this.top - head.top) + Math.abs(this.left - head.left)) / 20
-            if (distance < 10) {
+            if (distance < 15) {
                 isClear = false
             }
         } while (!isClear);
