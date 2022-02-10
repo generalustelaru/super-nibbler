@@ -1,6 +1,6 @@
 const modal = {
     isVisible : false,
-    introText: 'Select a difficulty.<br><span class="highlightedText">Arrow keys</span> to maneuver.<br><span class="highlightedText">[Enter]</span> to Start/Pause.<br>\'Special treat\'<br>every 10th chow.<br><div class="button" onclick="modal.dismiss()">OKAY</div>',
+    introText: '&lt;&lt; Difficulty Sound &gt;&gt;<br><span class="highlightedText">Arrow keys</span> to maneuver.<br><span class="highlightedText">[Enter]</span> to Start/Pause.<br>\'Special treat\'<br>every 10th chow.<br><div class="button" onclick="modal.dismiss()">OKAY</div>',
     pauseText: 'Paused',
     gameOverText: 'Game Over',
     dismiss : function() {
@@ -158,12 +158,8 @@ const difficultyControls = {
     }
 }
 const soundDisplay = {
-    toggle : function(setting) {
-        if (setting == false) {
-            document.querySelector('#sound').className = 'button'    
-        } else {
-            document.querySelector('#sound').className = 'button pressedButton'
-        }
-        
+    showVolume : function(oldMode, newMode) {
+        document.querySelector('#' + oldMode).className = 'button'
+        document.querySelector('#' + newMode).className = 'button pressedButton'
     }
 }

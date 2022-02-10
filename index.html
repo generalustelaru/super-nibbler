@@ -25,15 +25,17 @@
     <div class="upperSection">
         <div class="panel" id="leftPanel">
             <div class="panel__controlElement" id="difficultySetting">
-                <div class="button" id='normal' onclick="game.setDifficulty('normal')   ">Normal</div>
-                <div class="button" id='easy'   onclick="game.setDifficulty('easy')     ">Easy</div>
-                <div class="button" id='larva'   onclick="game.setDifficulty('larva')     ">Larva</div>
+                <div class="button" id='normal' onclick="game.setDifficulty('normal')">Normal</div>
+                <div class="button pressedButton" id='easy' onclick="game.setDifficulty('easy')">Easy</div>
+                <div class="button" id='larva' onclick="game.setDifficulty('larva')">Larva</div>
             </div>
         </div>
         <div class="pen"></div>
         <div class="panel" id="rightPanel">
             <div class="panel__controlElement">
-                <div class="button" id='sound' onclick="sounds.toggleSound()">Sounds</div>
+                <div class="button" id='loud' onclick="sounds.setSound('loud')">Loud</div>
+                <div class="button pressedButton" id='discreet' onclick="sounds.setSound('discreet')">Discreet</div>
+                <div class="button" id='mute' onclick="sounds.setSound('mute')">Mute</div>
             </div>
         </div>
     </div>
