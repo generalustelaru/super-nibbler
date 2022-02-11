@@ -6,7 +6,7 @@ const game = {
     setDifficulty(level) {
         if (this.isRunning()) {
             this.pauseGame()
-        }   
+        }
         document.querySelector('.pen').click();
         switch (level) {
             case 'larva':
@@ -23,7 +23,7 @@ const game = {
                 this.frameAt = 75
                 difficultyControls.switchDifficulty(this.difficulty,'normal')
                 this.difficulty = 'normal'
-                break;        
+                break;
             default:
                 break;
         }
@@ -47,7 +47,7 @@ const game = {
     resumeGame : function() {
         this.pause = false
         if (sounds.isSound) {
-            sounds.ambience.play()    
+            sounds.ambience.play()
         }
         modal.dismiss()
         run(this.frameAt)
@@ -77,7 +77,7 @@ function run(frameAt) {
             const step = commands.feedNext()
             const newHead = wurm.addSegment(step)
             bonusBar.reduceBar()
-            if (wormFood.isEaten()) {                
+            if (wormFood.isEaten()) {
                 scoreBox.bumpScore()
                 if (wormFood.count % 10 == 0) {
                     scoreBox.updateMultiplier('+')
@@ -88,7 +88,7 @@ function run(frameAt) {
             }
             if (isCrossed(newHead) || isOut(newHead)) {
                 sounds.play('bump')
-                wurm.cutHead()              
+                wurm.cutHead()
                 clearInterval(interval)
                 game.endGame()
             } else {
@@ -101,7 +101,7 @@ function run(frameAt) {
             clearInterval(interval)
         }
     }
-    const interval = setInterval(iteration, frameAt);    
+    const interval = setInterval(iteration, frameAt);
 }
 
 

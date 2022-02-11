@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="50"
+   height="50"
+   viewBox="0 0 13.229166 13.229167"
+   version="1.1"
+   id="svg1141"
+   inkscape:version="0.92.3 (2405546, 2018-03-11)"
+   sodipodi:docname="improvedMetabolism_disabled.svg">
+  <defs
+     id="defs1135" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.6376704"
+     inkscape:cx="50.499742"
+     inkscape:cy="16.813729"
+     inkscape:document-units="mm"
+     inkscape:current-layer="g1033"
+     showgrid="false"
+     units="px"
+     inkscape:snap-page="true"
+     inkscape:window-width="1920"
+     inkscape:window-height="1015"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata1138">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-283.77082)">
+    <g
+       id="g1033"
+       transform="matrix(0.17412936,0,0,0.17412936,0.65816792,267.9748)">
+      <g
+         id="g1059"
+         transform="translate(-168.01041,-5.9055712e-6)">
+        <rect
+           style="opacity:1;fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0.26458332;stroke-linecap:square;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:normal"
+           id="rect1047"
+           width="75.973213"
+           height="75.973213"
+           x="164.23065"
+           y="90.714287" />
+        <g
+           id="g1057"
+           transform="matrix(2.2505864,0,0,2.2505864,-10.963569,-12.573902)"
+           style="fill:#1e1e1e;fill-opacity:1">
+          <text
+             id="text1051"
+             y="76.723816"
+             x="80.699669"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:28.48913193px;line-height:1.25;font-family:Arcade;-inkscape-font-specification:'Arcade, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#1e1e1e;fill-opacity:1;stroke:none;stroke-width:2.13668489"
+             xml:space="preserve"><tspan
+               style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:28.48913193px;font-family:Arcade;-inkscape-font-specification:'Arcade, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#1e1e1e;fill-opacity:1;stroke-width:2.13668489"
+               y="76.723816"
+               x="80.699669"
+               id="tspan1049"
+               sodipodi:role="line">x</tspan></text>
+          <text
+             xml:space="preserve"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:37.32035065px;line-height:1.25;font-family:Arcade;-inkscape-font-specification:'Arcade, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#1e1e1e;fill-opacity:1;stroke:none;stroke-width:2.79902625"
+             x="92.204033"
+             y="78.751877"
+             id="text1055"><tspan
+               sodipodi:role="line"
+               id="tspan1053"
+               x="92.204033"
+               y="78.751877"
+               style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:37.32035065px;font-family:Arcade;-inkscape-font-specification:'Arcade, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#1e1e1e;fill-opacity:1;stroke-width:2.79902625">3</tspan></text>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

@@ -1,10 +1,14 @@
 const wormFood = {
     count: 0,
-    id : 'food', 
+    id : 'food',
     top : -1,
     left : -1,
+    maxRange : 28,
     getCount : function() {
         return this.count
+    },
+    setMaxRange : function() { // Hightened Senses
+        this.maxRange = 20
     },
     addFood : function() {
         this.count += 1
@@ -27,7 +31,7 @@ const wormFood = {
             ///////////////// Avoid placement too close to the head
             const head = wurm.getHead()
             const distance = (Math.abs(this.top - head.top) + Math.abs(this.left - head.left)) / 20
-            if (distance < 15) {
+            if (distance < 10 || distance > this.maxRange) {
                 isClear = false
             }
         } while (!isClear);
@@ -48,11 +52,12 @@ const wormFood = {
     },
     resetFood : function() {
         if (document.querySelector('#food')) {
-            clearSquare({id : this.id})    
+            clearSquare({id : this.id})
         }
         this.top = -1
         this.left = -1
         this.count = 0
+        this.maxRange = 28
         this.addFood()
     }
 }

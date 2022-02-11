@@ -6,7 +6,6 @@ const colorPalette = {
     faller : '',
     anchor : '',
     anchorValue : '',
-    isNewColor : false,
     isConfigured : false,
     step : 1,
     setStep : function(segments) {
@@ -112,9 +111,6 @@ const colorPalette = {
             this.faller = switcher
         }
     },
-    /* prepareConfiguration : function() {
-        this.isNewColor = true
-    }, */
     getColor : function() {
         this.updatePalette()
         return 'rgb(' + this.red + ',' + this.green + ',' + this.blue + ')'
@@ -145,7 +141,6 @@ const colorPalette = {
         this.faller = ''
         this.anchor = ''
         this.anchorValue = ''
-        this.isNewColor = false
         this.nextConfiguration = ''
         this.step = 50
         this.isConfigured = false
