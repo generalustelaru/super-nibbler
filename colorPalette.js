@@ -120,16 +120,22 @@ const colorPalette = {
         return 'rgb(' + this.red + ',' + this.green + ',' + this.blue + ')'
     },
     getFoodColor : function() {
-        if (this.nextConfiguration == 'rgb' || this.nextConfiguration == 'bgr') {
-            return 'rgb(0,255,0)'
-        } else if (this.nextConfiguration == 'rbg' || this.nextConfiguration == 'gbr') {
-            return 'rgb(0,0,255)'
-        } else {
-            return 'rgb(255,0,0)'
+        switch (this.nextConfiguration) {
+            case 'rgb':
+                return 'rgb(0,255,123)'
+            case 'bgr':
+                return 'rgb(123,255,0)'
+            case 'rbg':
+                return 'rgb(0,123,255)'
+            case 'gbr':
+                return 'rgb(123,0,255)'
+            case 'grb':
+                return 'rgb(255,0,123)'
+            case 'brg':
+                return 'rgb(255,123,0)'
+            default:
+                break
         }
-        //console.log('foodColor & bonus is '+ this.bonusReady)
-        
-        //return 'rgb(194, 0, 184)'
     },
     resetColors : function() {
         this.red = 194
