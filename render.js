@@ -1,6 +1,6 @@
 const modal = {
     isVisible : false,
-    introText: '&lt;&lt; Difficulty Sound &gt;&gt;<br><span class="highlightedText">Arrow keys</span> to maneuver.<br><span class="highlightedText">[Enter]</span> to Start/Pause.<br>\'Special treat\'<br>every 10th chow;<br>Evolve at every 100th.<br><div class="button" onclick="modal.display(\'license\')">License Info</div>',
+    introText: '&lt;&lt; Difficulty Sound &gt;&gt;<br><span class="highlightedText">Arrow keys</span> to maneuver.<br><span class="highlightedText">[Enter]</span> to Start/Pause.<br>Special treat<br>every 10th chow;<br>Special boons to come.<br><div class="button" onclick="modal.display(\'license\')">License Info</div>',
     pauseText: 'Paused',
     gameOverText: 'Game Over',
     licenseText: 'This game uses sounds and music licensed under Creative Commons<br>Sound Effects:<br><a href="https://freesound.org/people/LittleRobotSoundFactory/" target="_blank">LittleRobotSoundFactory</a><br>Music:<br><a href="https://freemusicarchive.org/music/Xylo-Ziko" target="_blank">Xylo-Ziko-Subterranean</a><br><div class="button" onclick="modal.display(\'cta\')">Okay</div>',
@@ -14,6 +14,7 @@ const modal = {
         let element = document.querySelector('.modal')
         if (message != 'intro' && message != 'license') {
             element.className = 'modal stopped'
+            state.saveData()
         } else {
             element.className = 'modal'
         }
@@ -112,13 +113,17 @@ const bonusBar = {
 const scoreBox = {
     score : 0,
     multiplier : 1,
+    scoreMultiplier : document.querySelector('#multiplier'),
+    scoreCounter : document.querySelector('#score'),
     updateMultiplier : function(string) {
         switch (string) {
             case '+':
+                this.scoreMultiplier.className = 'counter'
                 this.multiplier += 1
                 sounds.play('bonus')
                 break;        
             default:
+                this.scoreMultiplier.className = 'counter greyed'
                 sounds.play('bonusLost')
                 this.multiplier = 1
                 break;
@@ -127,7 +132,7 @@ const scoreBox = {
     },
     resetScore : function() {
         this.score = 0
-        this.multiplier = 1
+        this.updateMultiplier()
         this.displayScore()
     },
     bumpScore : function() {
@@ -140,17 +145,23 @@ const scoreBox = {
         this.displayScore()
     },
     displayScore : function() {
-        const scoreCounter = document.querySelector('#score')
-        scoreCounter.innerText = this.score
-        const scoreMultiplier = document.querySelector('#multiplier')
-        scoreMultiplier.innerText = 'x' + this.multiplier
+        this.scoreCounter.innerText = this.score
+        this.scoreMultiplier.innerText = 'x' + this.multiplier
     }
 }
 
-const difficultyControls = {
-    switchDifficulty : function(old, neu) {
-        document.querySelector('#' + old).className = 'button'
-        document.querySelector('#' + neu).className = 'button pressedButton'
+const difficultyDisplay = {
+    levels : ['larva', 'easy', 'normal'],
+    update : function(option) {
+        this.levels.forEach(level => {
+            if (option == level) {
+                document.querySelector('#' + level).className = 'button pressedButton'
+            } else {
+                document.querySelector('#' + level).className = 'button'
+            }
+        })
+        
+        
     }
 }
 

@@ -53,6 +53,7 @@ const wurm = {
             clearSquare(segment)
         })
         this.segments = []
+        this.idCounter = 0
     },
     spawnWurm : function() {
         let left = 120

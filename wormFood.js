@@ -3,7 +3,8 @@ const wormFood = {
     id : 'food',
     top : -1,
     left : -1,
-    maxRange : 28,
+    maxRange : 30, // absolute maximum: 30
+    minRange : 22, // absolute minimum: 1
     getCount : function() {
         return this.count
     },
@@ -31,7 +32,7 @@ const wormFood = {
             ///////////////// Avoid placement too close to the head
             const head = wurm.getHead()
             const distance = (Math.abs(this.top - head.top) + Math.abs(this.left - head.left)) / 20
-            if (distance < 10 || distance > this.maxRange) {
+            if (distance < this.minRange || distance > this.maxRange) {
                 isClear = false
             }
         } while (!isClear);

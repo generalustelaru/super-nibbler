@@ -1,43 +1,93 @@
+function init(){
+    state.connect()
+    modal.display('intro')
+}
+const state = {
+    data : {
+        difficulty : 'easy',
+        sound : 'mute', //TODO: centralise & connect
+        score : 0, //TODO: centralise & connect
+        abilities : { 
+            descendants : 0,
+            shedding : false,
+            improvedMetabolism : false,
+            heightenedSenses : false,
+            fasterSynapses : false,
+            toughEpiderm : false
+        },
+        wurmState : [], //TODO: centralise & connect
+        food : { //TODO: centralise & connect
+            count: 0,
+            top : 0,
+            left : 0,
+        }
+    },////////////////////////////////
+    connect : function() {
+        if (localStorage.getItem('superNibblerData')) {
+            this.retreiveData()
+        } else {
+            console.log('New data object created')
+            this.saveData()
+        }
+        console.log(this.data)
+    },
+    saveData : function() {
+        const stringData = JSON.stringify(this.data)
+        localStorage.setItem('superNibblerData', stringData)
+        console.log('Data saved')
+    },
+    retreiveData : function() {
+        const stringData = localStorage.getItem('superNibblerData')
+        this.data = JSON.parse(stringData)
+        this.updateGlobalDisplay()
+    },/////////////////////////////////
+    updateGlobalDisplay : function() {
+        difficultyDisplay.update(this.data.difficulty)
+    },
+    updateDifficulty : function(option) {
+        this.data.difficulty = option
+        difficultyDisplay.update(option)
+    },
+    getDifficulty : function() {
+        return this.data.difficulty
+    }
+}
+
 const game = {
     pause : true,
     gameOver : true,
-    difficulty : 'easy',
+    //difficulty : 'easy',
     frameAt : 150,
-    setDifficulty(level) {
-        if (this.isRunning()) {
-            this.pauseGame()
-        }
+    setDifficulty(option) {
+        state.updateDifficulty(option)
         document.querySelector('.pen').click();
-        switch (level) {
+        switch (option) {
             case 'larva':
                 this.frameAt = 300
-                difficultyControls.switchDifficulty(this.difficulty, 'larva')
-                this.difficulty = 'larva'
                 break;
             case 'easy':
                 this.frameAt = 150
-                difficultyControls.switchDifficulty(this.difficulty,'easy')
-                this.difficulty = 'easy'
                 break;
             case 'normal':
                 this.frameAt = 75
-                difficultyControls.switchDifficulty(this.difficulty,'normal')
-                this.difficulty = 'normal'
                 break;
             default:
                 break;
         }
+        if (this.isRunning()) {
+            this.pauseGame()
+        }
     },
     newGame : function() {
-        this.setDifficulty(this.difficulty)
+        this.setDifficulty(state.getDifficulty())
         this.gameOver = false
+        colorPalette.resetColors()
+        colorPalette.rollConfiguration()
         wurm.removeWurm()
         wurm.spawnWurm()
         sounds.playAmbience()
         bonusBar.depleteBar()
         scoreBox.resetScore()
-        colorPalette.resetColors()
-        colorPalette.rollConfiguration()
         modal.dismiss()
         wormFood.resetFood()
         commands.clearCommands()

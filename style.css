@@ -6,6 +6,9 @@ body {
 a {
     color: rgb(245, 130, 239);
 }
+.greyed {
+    color : rgb(40,40,40);
+}
 .modal {
     box-sizing: border-box;
     position: absolute;
@@ -23,7 +26,7 @@ a {
 }
 .stopped {
     padding-top: 270px;
-    opacity: 50%;
+    opacity: 80%;
 }
 .highlightedText {
     color: #ffffff;
@@ -90,6 +93,7 @@ a {
     display: flex;
     justify-content: space-evenly;
 }
+
 .control {
     position: relative;
     margin:auto;
@@ -118,6 +122,9 @@ a {
     font-size: 25px;
     height: 50px;
     width: 50px;
+}
+#descendants {
+    user-select: none;
 }
 .numbers, .descriptions {
     width: 600px;

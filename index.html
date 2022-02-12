@@ -14,7 +14,7 @@
         }
     </style>
 </head>
-<body onload="modal.display('intro')">
+<body onload="init()">
     <div class="modal"></div>
     <div class="section upper">
         <div class="panel" id="leftPanel">
@@ -39,15 +39,16 @@
                     <div id="fill"></div>
             </div>
             <div class="stats">
-                <div class="stats__icon" id="generation">Gen<br>1</div>
-                <div class="stats__icon" id="heightenedSenses">     <img src="graphics/hightenedSenses_disabled.svg"></div>
+                <div class="stats__icon greyed" id="descendants">          Gen<br><span id="genCounter">1</span></div>
+                <div class="stats__icon" id="shedding">             <img src="graphics/shedding_disabled.svg"></div>
                 <div class="stats__icon" id="improvedMetabolism">   <img src="graphics/improvedMetabolism_disabled.svg"></div>
+                <div class="stats__icon" id="heightenedSenses">     <img src="graphics/hightenedSenses_disabled.svg"></div>
                 <div class="stats__icon" id="fasterSynapses">       <img src="graphics/fasterSynapses_disabled.svg"></div>
                 <div class="stats__icon" id="toughEpiderm">         <img src="graphics/toughEpiderm_disabled.svg"></div>
-                <div class="stats__icon" id="shedding">             <img src="graphics/shedding_disabled.svg"></div>
+                
             </div>
             <div class="numbers">
-                <div class="counter" id="multiplier"></div>
+                <div class="counter greyed" id="multiplier"></div>
                 <div class="counter" id="score"></div>
             </div>
             <div class="descriptions">

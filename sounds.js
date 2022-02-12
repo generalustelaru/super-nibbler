@@ -29,6 +29,7 @@ const sounds = {
     playAmbience : function(){
         if (this.isSound) {
             this.ambience.loop = true
+            this.ambience.playbackRate = 1
             this.ambience.play()
         }
     },
