@@ -5,8 +5,8 @@ function init(){
 const state = {
     data : {
         difficulty : 'easy',
-        sound : 'mute', //TODO: centralise & connect
-        score : 0, //TODO: centralise & connect
+        sound : 'mute',
+        score : 0, //TODO: centralise & connect score
         abilities : { 
             descendants : 0,
             shedding : false,
@@ -15,13 +15,15 @@ const state = {
             fasterSynapses : false,
             toughEpiderm : false
         },
-        wurmState : [], //TODO: centralise & connect
-        food : { //TODO: centralise & connect
+        wurmState : [], //TODO: centralise & connect wurm
+
+        food : { //TODO: centralise & connect food
             count: 0,
             top : 0,
             left : 0,
         }
-    },////////////////////////////////
+    },
+    ////////////////////////////////
     connect : function() {
         if (localStorage.getItem('superNibblerData')) {
             this.retreiveData()
@@ -39,17 +41,20 @@ const state = {
     retreiveData : function() {
         const stringData = localStorage.getItem('superNibblerData')
         this.data = JSON.parse(stringData)
-        this.updateGlobalDisplay()
-    },/////////////////////////////////
-    updateGlobalDisplay : function() {
-        difficultyDisplay.update(this.data.difficulty)
+        this.distributeData()
     },
+    distributeData : function() {
+        game.setDifficulty(this.data.difficulty)
+        sounds.setSound(this.data.sound)
+    },
+    /////////////////////////////////
     updateDifficulty : function(option) {
         this.data.difficulty = option
-        difficultyDisplay.update(option)
+        state.saveData()
     },
-    getDifficulty : function() {
-        return this.data.difficulty
+    updateSound : function(option) {
+        this.data.sound = option
+        state.saveData()
     }
 }
 
@@ -60,7 +65,6 @@ const game = {
     frameAt : 150,
     setDifficulty(option) {
         state.updateDifficulty(option)
-        document.querySelector('.pen').click();
         switch (option) {
             case 'larva':
                 this.frameAt = 300
@@ -74,12 +78,12 @@ const game = {
             default:
                 break;
         }
+        difficultyDisplay.update(option)
         if (this.isRunning()) {
             this.pauseGame()
         }
     },
     newGame : function() {
-        this.setDifficulty(state.getDifficulty())
         this.gameOver = false
         colorPalette.resetColors()
         colorPalette.rollConfiguration()
@@ -144,7 +148,7 @@ function run(frameAt) {
             } else {
                 wurm.displaySegment()
             }
-            if (!document.hasFocus()) {
+            if (!document.hasFocus()) { // trigger pause on leaving document (lose focus)
                 game.pauseGame()
             }
         } else {

@@ -14,7 +14,6 @@ const modal = {
         let element = document.querySelector('.modal')
         if (message != 'intro' && message != 'license') {
             element.className = 'modal stopped'
-            state.saveData()
         } else {
             element.className = 'modal'
         }
@@ -160,14 +159,18 @@ const difficultyDisplay = {
                 document.querySelector('#' + level).className = 'button'
             }
         })
-        
-        
     }
 }
 
 const soundDisplay = {
-    showVolume : function(oldMode, newMode) {
-        document.querySelector('#' + oldMode).className = 'button'
-        document.querySelector('#' + newMode).className = 'button pressedButton'
-    }
+    levels : ['mute', 'discreet', 'loud'],
+    update : function(option) {
+        this.levels.forEach(level => {
+            if (option == level) {
+                document.querySelector('#' + level).className = 'button pressedButton'
+            } else {
+                document.querySelector('#' + level).className = 'button'
+            }
+        })
+    }    
 }
