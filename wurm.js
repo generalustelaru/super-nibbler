@@ -33,6 +33,7 @@ const wurm = {
         const tail = this.getTail()
         this.segments.pop()
         clearSquare(tail)
+        //TODO: update state
     },
     translateCourse : function(command) {
         switch (command) {

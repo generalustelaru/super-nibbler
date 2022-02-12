@@ -1,7 +1,7 @@
 const colorPalette = {
-    red : 0,
+    red : 194,
     green : 0,
-    blue : 0,
+    blue : 184,
     climber : '',
     faller : '',
     anchor : '',

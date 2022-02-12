@@ -1,6 +1,7 @@
 const modal = {
     isVisible : false,
     introText: '&lt;&lt; Difficulty Sound &gt;&gt;<br><span class="highlightedText">Arrow keys</span> to maneuver.<br><span class="highlightedText">[Enter]</span> to Start/Pause.<br>Special treat<br>every 10th chow;<br>Special boons to come.<br><div class="button" onclick="modal.display(\'license\')">License Info</div>',
+    continueText: 'You have a game in rogress...<br><div class="button" onclick="modal.display(\'cta\')">Continue</div>',
     pauseText: 'Paused',
     gameOverText: 'Game Over',
     licenseText: 'This game uses sounds and music licensed under Creative Commons<br>Sound Effects:<br><a href="https://freesound.org/people/LittleRobotSoundFactory/" target="_blank">LittleRobotSoundFactory</a><br>Music:<br><a href="https://freemusicarchive.org/music/Xylo-Ziko" target="_blank">Xylo-Ziko-Subterranean</a><br><div class="button" onclick="modal.display(\'cta\')">Okay</div>',
@@ -26,7 +27,8 @@ const modal = {
                 contents = this.gameOverText
                 break
             case 'intro':
-                contents = this.introText
+                //console.log('isGameData: ' + state.data.isGameData)
+                (state.data.isGameData ? contents = this.continueText : contents = this.introText)
                 break
             case 'license':
                 contents = this.licenseText
@@ -75,20 +77,28 @@ function clearSquare(object) {
 }
 
 const bonusBar = {
-    fill : 600,
+    fill : 0,
     unit : 2,
     isActive : false,
+    setFill : function(fill) {
+        this.fill = fill
+        if (fill > 0) {
+            this.isActive = true
+        }
+    },
     getIsActive : function(){
         return this.isActive
     },
     depleteBar : function() {
         this.isActive = false
         this.fill = 0
+        state.updateBonusBarFill(this.fill)
         this.updateDisplay()
     },
     fillBar : function() {
         this.isActive = true
         this.fill = 600
+        state.updateBonusBarFill(this.fill)
         this.updateDisplay()
     },
     reduceBar : function() {
@@ -103,6 +113,7 @@ const bonusBar = {
                     scoreBox.updateMultiplier() 
                 }
             }
+        state.updateBonusBarFill(this.fill)
         this.updateDisplay()
         }
     },
@@ -111,37 +122,52 @@ const bonusBar = {
     }
 }
 
-const scoreBox = {
+const scoreBox = { //TODO: Detach logic from display commands
     score : 0,
     multiplier : 1,
-    scoreMultiplier : document.querySelector('#multiplier'),
-    scoreCounter : document.querySelector('#score'),
+    multiplierSwatch : document.querySelector('#multiplier'),
+    scoreSwatch : document.querySelector('#score'),
     updateMultiplier : function(string) {
         switch (string) {
             case '+':
-                this.scoreMultiplier.className = 'counter'
+                this.multiplierSwatch.className = 'counter'
                 this.multiplier += 1
+                state.updateMultiplier(this.multiplier)
                 sounds.play('bonus')
                 break
             case 'reset':
-                this.scoreMultiplier.className = 'counter greyed'
+                this.multiplierSwatch.className = 'counter greyed'
                 this.multiplier = 1
+                state.updateMultiplier(this.multiplier)
                 break
             default:
-                this.scoreMultiplier.className = 'counter greyed'
+                this.multiplierSwatch.className = 'counter greyed'
                 this.multiplier = 1
+                state.updateMultiplier(this.multiplier)
                 sounds.play('bonusLost')
                 break
         }
         this.displayScore()
     },
+    setScore : function(score, multiplier) { 
+        this.score = score
+        this.multiplier = multiplier
+        if (multiplier > 1) {
+            this.multiplierSwatch.className = 'counter'
+        }
+        this.displayScore()
+    },
     resetScore : function() {
         this.score = 0
-        this.updateMultiplier('reset')
+        state.updateScore(this.score)
         this.displayScore()
+        this.updateMultiplier('reset')
+        
     },
     bumpScore : function() {
         this.score += this.multiplier
+        state.updateScore(this.score)
+        
         if (this.multiplier == 1) {
             sounds.play('food')
         } else {
@@ -150,8 +176,8 @@ const scoreBox = {
         this.displayScore()
     },
     displayScore : function() {
-        this.scoreCounter.innerText = this.score
-        this.scoreMultiplier.innerText = 'x' + this.multiplier
+        this.scoreSwatch.innerText = this.score
+        this.multiplierSwatch.innerText = 'x' + this.multiplier
     }
 }
 

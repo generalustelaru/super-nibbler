@@ -61,7 +61,7 @@ const sounds = {
                     this.bonus.volume = this.volume
                     this.bonus.play()
                     break
-                case 'bonusLost': //TODO: [BUG] bonusLost shouldn't be played at start of new game
+                case 'bonusLost':
                     this.bonusLost.volume = this.volume
                     this.bonusLost.play()
                 default:
