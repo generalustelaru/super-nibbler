@@ -92,17 +92,19 @@ const bonusBar = {
         this.updateDisplay()
     },
     reduceBar : function() {
-        this.fill -= this.unit
-        if (this.fill < 0) {
-            this.fill = 0
-            if (this.isActive) {
-                this.isActive = false
-                colorPalette.resetColors()
-                colorPalette.rollConfiguration()
-                scoreBox.updateMultiplier() 
+        if(this.isActive) {
+            this.fill -= this.unit
+            if (this.fill < 0) {
+                this.fill = 0
+                if (this.isActive) {
+                    this.isActive = false
+                    colorPalette.resetColors()
+                    colorPalette.rollConfiguration()
+                    scoreBox.updateMultiplier() 
+                }
             }
-        }
         this.updateDisplay()
+        }
     },
     updateDisplay : function() {
         document.getElementById('fill').style.width = (this.fill + 'px')
@@ -120,18 +122,22 @@ const scoreBox = {
                 this.scoreMultiplier.className = 'counter'
                 this.multiplier += 1
                 sounds.play('bonus')
-                break;        
+                break
+            case 'reset':
+                this.scoreMultiplier.className = 'counter greyed'
+                this.multiplier = 1
+                break
             default:
                 this.scoreMultiplier.className = 'counter greyed'
-                sounds.play('bonusLost')
                 this.multiplier = 1
-                break;
+                sounds.play('bonusLost')
+                break
         }
-        scoreBox.displayScore()
+        this.displayScore()
     },
     resetScore : function() {
         this.score = 0
-        this.updateMultiplier()
+        this.updateMultiplier('reset')
         this.displayScore()
     },
     bumpScore : function() {
