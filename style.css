@@ -1,8 +1,13 @@
 body {
     background: rgb(43,8,51);
+    font-family: Arcade;
+    color:rgb(194, 0, 184);
 }
 a {
     color: rgb(245, 130, 239);
+}
+.greyed {
+    color : rgb(40,40,40);
 }
 .modal {
     box-sizing: border-box;
@@ -17,27 +22,29 @@ a {
     background: #000000;
     text-align: center;
     color: #cc00ff;
-    font-family: Arcade;
     font-size: 50px;
-
 }
 .stopped {
     padding-top: 270px;
-    opacity: 50%;
+    opacity: 80%;
 }
 .highlightedText {
     color: #ffffff;
 }
-.upperSection {
+.section {
     margin: auto;
-    height: 600px;
-    /* width: auto; */
     display: flex;
-    flex-direction: row;
     justify-content: center;
 }
+.upper {
+    flex-direction: row;
+    height: 600px;
+}
+.lower {
+    flex-direction: column;
+    height: 200px;
+}
 .panel {
-    /* background-color: #5bf646; */
     height: 600px;
     width: 100px;
 }
@@ -50,8 +57,6 @@ a {
     user-select: none;
     background: #000000;
     border: 1px solid rgb(194, 0, 184);
-    color:rgb(194, 0, 184);
-    font-family: Arcade;
     text-align: center;
     font-size: 25px;
     width: auto;
@@ -63,7 +68,6 @@ a {
 .pressedButton {
     color:rgb(245, 130, 239);
 }
-
 .pen {
     position: relative;
     /* margin: auto; */
@@ -76,17 +80,20 @@ a {
     position: absolute;
     width: 18px;
     height: 18px;
-    /* background: rgb(194, 0, 184); */
-    /* border: 1px solid #ffffff; */
 }
 .first {
     background:#5bf646;
-    /* z-index: 2; */
 }
 #food {
     background: rgb(255, 255, 255);
-    /* color: rgb(194, 0, 184); */
 }
+.stats {
+    width: 600px;
+    height: 50px;
+    display: flex;
+    justify-content: space-evenly;
+}
+
 .control {
     position: relative;
     margin:auto;
@@ -97,7 +104,6 @@ a {
     padding-top: 0px;
     display: flex;
     flex-direction: column;
-    /* justify-content: center; */
     align-items: center;
     border: 1px solid #000000;
 }
@@ -111,21 +117,26 @@ a {
     height: 30px;
     background: rgb(194, 0, 184);
 }
+.stats__icon {
+    text-align: center;
+    font-size: 25px;
+    height: 50px;
+    width: 50px;
+}
+#descendants {
+    user-select: none;
+}
 .numbers, .descriptions {
-    
     width: 600px;
-    height: 100px;
-    /* background: olivedrab; */
+    height: 55px;
     color: #cc00ff;
-    font-family: Arcade;
     display: flex;
     flex-direction: row;
     align-items: center;
 }
 .counter, .text{
-    /* border: 1px solid black; */
     text-align: center;
     height: auto;
     width: 300px;
-    font-size: 95px;
+    font-size: 60px;
 }

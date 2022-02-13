@@ -1,7 +1,8 @@
 const modal = {
     isVisible : false,
-    introText: '&lt;&lt; Difficulty Sound &gt;&gt;<br><span class="highlightedText">Arrow keys</span> to maneuver.<br><span class="highlightedText">[Enter]</span> to Start/Pause.<br>\'Special treat\'<br>every 10th chow.<br><div class="button" onclick="modal.display(\'license\')">License Info</div>',
-    pauseText: 'Paused',
+    introText: '&lt;&lt; Difficulty Sound &gt;&gt;<br><span class="highlightedText">Arrow keys</span> to maneuver.<br><span class="highlightedText">[Enter]</span> to Start/Pause.<br>Special treat<br>every 10th chow;<br>Special boons to come.<br><div class="button" onclick="modal.display(\'license\')">License Info</div>',
+    continueText: 'You have a game in progress...<br><div class="button" onclick="modal.display(\'cta\')">Continue</div>',
+    pauseText: 'Paused<br>&<br>Game Saved',
     gameOverText: 'Game Over',
     licenseText: 'This game uses sounds and music licensed under Creative Commons<br>Sound Effects:<br><a href="https://freesound.org/people/LittleRobotSoundFactory/" target="_blank">LittleRobotSoundFactory</a><br>Music:<br><a href="https://freemusicarchive.org/music/Xylo-Ziko" target="_blank">Xylo-Ziko-Subterranean</a><br><div class="button" onclick="modal.display(\'cta\')">Okay</div>',
     ctaText: 'Press Enter',
@@ -26,7 +27,8 @@ const modal = {
                 contents = this.gameOverText
                 break
             case 'intro':
-                contents = this.introText
+                //console.log('isGameData: ' + state.data.isGameData)
+                (state.data.isGameData ? contents = this.continueText : contents = this.introText)
                 break
             case 'license':
                 contents = this.licenseText
@@ -75,63 +77,97 @@ function clearSquare(object) {
 }
 
 const bonusBar = {
-    fill : 600,
+    fill : 0,
     unit : 2,
     isActive : false,
+    setFill : function(fill) {
+        this.fill = fill
+        if (fill > 0) {
+            this.isActive = true
+        }
+    },
     getIsActive : function(){
         return this.isActive
     },
     depleteBar : function() {
         this.isActive = false
         this.fill = 0
+        state.updateBonusBarFill(this.fill)
         this.updateDisplay()
     },
     fillBar : function() {
         this.isActive = true
         this.fill = 600
+        state.updateBonusBarFill(this.fill)
         this.updateDisplay()
     },
     reduceBar : function() {
-        this.fill -= this.unit
-        if (this.fill < 0) {
-            this.fill = 0
-            if (this.isActive) {
-                this.isActive = false
-                colorPalette.resetColors()
-                colorPalette.rollConfiguration()
-                scoreBox.updateMultiplier() 
+        if(this.isActive) {
+            this.fill -= this.unit
+            if (this.fill < 0) {
+                this.fill = 0
+                if (this.isActive) {
+                    this.isActive = false
+                    colorPalette.resetColors()
+                    colorPalette.rollConfiguration()
+                    scoreBox.updateMultiplier() 
+                }
             }
-        }
+        state.updateBonusBarFill(this.fill)
         this.updateDisplay()
+        }
     },
     updateDisplay : function() {
         document.getElementById('fill').style.width = (this.fill + 'px')
     }
 }
 
-const scoreBox = {
+const scoreBox = { //TODO: Detach logic from display commands
     score : 0,
     multiplier : 1,
+    multiplierSwatch : document.querySelector('#multiplier'),
+    scoreSwatch : document.querySelector('#score'),
     updateMultiplier : function(string) {
         switch (string) {
             case '+':
+                this.multiplierSwatch.className = 'counter'
                 this.multiplier += 1
+                state.updateMultiplier(this.multiplier)
                 sounds.play('bonus')
-                break;        
-            default:
-                sounds.play('bonusLost')
+                break
+            case 'reset':
+                this.multiplierSwatch.className = 'counter greyed'
                 this.multiplier = 1
-                break;
+                state.updateMultiplier(this.multiplier)
+                break
+            default:
+                this.multiplierSwatch.className = 'counter greyed'
+                this.multiplier = 1
+                state.updateMultiplier(this.multiplier)
+                sounds.play('bonusLost')
+                break
         }
-        scoreBox.displayScore()
+        this.displayScore()
+    },
+    setScore : function(score, multiplier) { 
+        this.score = score
+        this.multiplier = multiplier
+        if (multiplier > 1) {
+            this.multiplierSwatch.className = 'counter'
+        }
+        this.displayScore()
     },
     resetScore : function() {
         this.score = 0
-        this.multiplier = 1
+        state.updateScore(this.score)
         this.displayScore()
+        this.updateMultiplier('reset')
+        
     },
     bumpScore : function() {
         this.score += this.multiplier
+        state.updateScore(this.score)
+        
         if (this.multiplier == 1) {
             sounds.play('food')
         } else {
@@ -140,23 +176,33 @@ const scoreBox = {
         this.displayScore()
     },
     displayScore : function() {
-        const scoreCounter = document.querySelector('#score')
-        scoreCounter.innerText = this.score
-        const scoreMultiplier = document.querySelector('#multiplier')
-        scoreMultiplier.innerText = 'x' + this.multiplier
+        this.scoreSwatch.innerText = this.score
+        this.multiplierSwatch.innerText = 'x' + this.multiplier
     }
 }
 
-const difficultyControls = {
-    switchDifficulty : function(old, neu) {
-        document.querySelector('#' + old).className = 'button'
-        document.querySelector('#' + neu).className = 'button pressedButton'
+const difficultyDisplay = {
+    levels : ['larva', 'easy', 'normal'],
+    update : function(option) {
+        this.levels.forEach(level => {
+            if (option == level) {
+                document.querySelector('#' + level).className = 'button pressedButton'
+            } else {
+                document.querySelector('#' + level).className = 'button'
+            }
+        })
     }
 }
 
 const soundDisplay = {
-    showVolume : function(oldMode, newMode) {
-        document.querySelector('#' + oldMode).className = 'button'
-        document.querySelector('#' + newMode).className = 'button pressedButton'
-    }
+    levels : ['mute', 'discreet', 'loud'],
+    update : function(option) {
+        this.levels.forEach(level => {
+            if (option == level) {
+                document.querySelector('#' + level).className = 'button pressedButton'
+            } else {
+                document.querySelector('#' + level).className = 'button'
+            }
+        })
+    }    
 }

@@ -33,6 +33,7 @@ const wurm = {
         const tail = this.getTail()
         this.segments.pop()
         clearSquare(tail)
+        state.updateWurm({segments : this.segments, idCounter : this.idCounter})
     },
     translateCourse : function(command) {
         switch (command) {
@@ -53,6 +54,7 @@ const wurm = {
             clearSquare(segment)
         })
         this.segments = []
+        this.idCounter = 0
     },
     spawnWurm : function() {
         let left = 120
@@ -66,5 +68,12 @@ const wurm = {
             displaySquare(segment)
             left += 20
         }
+    },
+    setWurm : function(wurmObject) {
+        this.segments = wurmObject.segments
+        this.idCounter = wurmObject.idCounter
+        this.segments.forEach(segment => {
+            displaySquare(segment)
+        })
     }
 }

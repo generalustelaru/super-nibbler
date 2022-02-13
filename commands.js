@@ -55,10 +55,14 @@ const commands = { // manages commands
     },
     recordCommand : function(command) {
         this.current = command
+        state.updateCommand(command)
     },
     clearCommands : function() {
         this.current = ''
         this.auto = 'right'
+    },
+    setCommand : function(command) {
+        this.auto = command
     }
 }
 

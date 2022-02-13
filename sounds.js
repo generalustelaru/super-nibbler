@@ -1,12 +1,10 @@
 const sounds = {
     isSound : false,
-    mode : 'mute',
+    //mode : 'mute',
     volume : 0.1,
-    setSound : function(newMode) {
-        if (game.isRunning()) {
-            game.pauseGame()
-        }
-        switch (newMode) {
+    setSound : function(option) {
+        state.updateSound(option)
+        switch (option) {
             case 'mute':
                 this.isSound = false
                 this.ambience.pause()
@@ -22,13 +20,16 @@ const sounds = {
                 this.ambience.volume = this.volume
                 break
         }
-        soundDisplay.showVolume(this.mode, newMode)
-        this.mode = newMode
+        soundDisplay.update(option)
+        if (game.isRunning()) {
+            game.pauseGame()
+        }
     },
     ambience : new Audio('sounds/Xylo-Ziko - Subterranean.mp3'),
     playAmbience : function(){
         if (this.isSound) {
             this.ambience.loop = true
+            this.ambience.playbackRate = 1
             this.ambience.play()
         }
     },
