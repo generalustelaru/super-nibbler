@@ -1,8 +1,8 @@
 const modal = {
     isVisible : false,
     introText: '&lt;&lt; Difficulty Sound &gt;&gt;<br><span class="highlightedText">Arrow keys</span> to maneuver.<br><span class="highlightedText">[Enter]</span> to Start/Pause.<br>Special treat<br>every 10th chow;<br>Special boons to come.<br><div class="button" onclick="modal.display(\'license\')">License Info</div>',
-    continueText: 'You have a game in rogress...<br><div class="button" onclick="modal.display(\'cta\')">Continue</div>',
-    pauseText: 'Paused',
+    continueText: 'You have a game in progress...<br><div class="button" onclick="modal.display(\'cta\')">Continue</div>',
+    pauseText: 'Paused<br>&<br>Game Saved',
     gameOverText: 'Game Over',
     licenseText: 'This game uses sounds and music licensed under Creative Commons<br>Sound Effects:<br><a href="https://freesound.org/people/LittleRobotSoundFactory/" target="_blank">LittleRobotSoundFactory</a><br>Music:<br><a href="https://freemusicarchive.org/music/Xylo-Ziko" target="_blank">Xylo-Ziko-Subterranean</a><br><div class="button" onclick="modal.display(\'cta\')">Okay</div>',
     ctaText: 'Press Enter',

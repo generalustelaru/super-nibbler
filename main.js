@@ -10,28 +10,28 @@ const state = {
         score : 0,
         multiplier : 1,
         bonusBarFill : 0,
-        abilities : { 
-            descendants : 0,
-            shedding : false,
-            improvedMetabolism : false,
-            heightenedSenses : false,
-            fasterSynapses : false,
-            toughEpiderm : false
+        colorPalette : {
+            red : 194,
+            green : 0,
+            blue : 184,
+            climber : '',
+            faller : '',
+            anchor : '',
+            anchorValue : '',
+            isConfigured : false,
+            step : 1,
+            nextConfiguration : ''
         },
-        wurmState : [],
+        command : 'right',
+        wurm : {
+            segments : [],
+            idCounter : 0,
+        },
         food : { 
             count: 0,
             top : 0,
             left : 0,
-        }
-    },
-    data : {
-        difficulty : 'easy',
-        sound : 'mute',
-        isGameData : false,
-        score : 0, 
-        multiplier : 1,
-        bonusBarFill : 0,
+        },
         abilities : { 
             descendants : 0,
             shedding : false,
@@ -39,27 +39,22 @@ const state = {
             heightenedSenses : false,
             fasterSynapses : false,
             toughEpiderm : false
-        },
-        wurmState : [], //TODO: centralise & connect wurm
-
-        food : { //TODO: centralise & connect food
-            count: 0,
-            top : 0,
-            left : 0,
         }
     },
+    data : {},
     ////////////////////////////////
     connect : function() {
         if (localStorage.getItem('superNibblerData')) {
             this.retreiveData()
         } else {
-            this.saveData()
+            this.data = this.defaultData
         }
         console.log(this.data)
     },
     saveData : function() {
         const stringData = JSON.stringify(this.data)
         localStorage.setItem('superNibblerData', stringData)
+        console.log('Game Saved')
     },
     retreiveData : function() {
         const stringData = localStorage.getItem('superNibblerData')
@@ -74,6 +69,11 @@ const state = {
         sounds.setSound(this.data.sound)
         scoreBox.setScore(this.data.score, this.data.multiplier)
         bonusBar.setFill(this.data.bonusBarFill)
+        colorPalette.setColors(this.data.colorPalette)
+        wormFood.setFood(this.data.food)
+        commands.setCommand(this.data.command)
+        wurm.setWurm(this.data.wurm)
+        
     },
     clearGameData : function() {
         const difficulty = this.data.difficulty
@@ -81,28 +81,35 @@ const state = {
         this.data = this.defaultData
         this.data.difficulty = difficulty
         this.data.sound = sound
-        state.saveData()
+        this.saveData()
     },
     /////////////////////////////////
     updateDifficulty : function(option) {
         this.data.difficulty = option
-        state.saveData()
     },
     updateSound : function(option) {
         this.data.sound = option
-        state.saveData()
     },
     updateScore : function(score) {
         this.data.score = score
-        state.saveData()
     },
     updateMultiplier : function(multiplier) {
         this.data.multiplier = multiplier
-        state.saveData()
     },
     updateBonusBarFill : function(fill) {
         this.data.bonusBarFill = fill
-        state.saveData()
+    },
+    updateColorPalette : function(colorObject) {
+        this.data.colorPalette = colorObject
+    },
+    updateFood : function(foodObject) {
+        this.data.food = foodObject
+    },
+    updateCommand :function(command) {
+        this.data.command = command
+    },
+    updateWurm : function(wurmObject) {
+        this.data.wurm = wurmObject
     }
 }
 
@@ -134,10 +141,7 @@ const game = {
     continueGame : function() {
         this.gameOver = false
         colorPalette.rollConfiguration()
-        wurm.spawnWurm()
         sounds.playAmbience()
-        wormFood.resetFood()
-        commands.clearCommands()
         this.pause = false
         run(this.frameAt)
     },
@@ -171,6 +175,7 @@ const game = {
         this.pause = true
         modal.display('pause')
         sounds.ambience.pause()
+        state.saveData()
     },
     endGame : function() {
         state.clearGameData()

@@ -35,7 +35,8 @@ const wormFood = {
             if (distance < this.minRange || distance > this.maxRange) {
                 isClear = false
             }
-        } while (!isClear);
+        } while (!isClear)
+        state.updateFood({count : this.count, top : this.top, left : this.left})
         displaySquare({id : this.id, top : this.top, left : this.left, count : this.count}) // Display food
         if (this.count % 10 == 1 && this.count > 1) { // Initiate new bonus streak
             bonusBar.fillBar()
@@ -50,6 +51,12 @@ const wormFood = {
             return true
         }
         return false
+    },
+    setFood : function(foodObject) {
+        this.count = foodObject.count
+        this.top = foodObject.top
+        this.left = foodObject.left
+        displaySquare({id : this.id, top : this.top, left : this.left, count : this.count})
     },
     resetFood : function() {
         if (document.querySelector('#food')) {
