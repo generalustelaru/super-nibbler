@@ -22,12 +22,13 @@ window.addEventListener('keydown', (e) => { // track arrow keypresses
             }
             break;
         case 'Enter':
-            if (game.isRunning()) {
+            if (!game.isPaused) {
                 game.pauseGame()
-            } else if (game.isOver()){
+            } else if (game.isOver){
                 if (modal.isVisible) {
                     modal.dismiss()
                 }
+                //TODO: clear data
                 game.newGame()
             } else {
                 game.resumeGame()
@@ -51,17 +52,20 @@ const commands = { // manages commands
         return command
     },
     reportLastCommand : function() {
+        guideArrow.setDirection(this.auto)
         return this.auto
     },
     recordCommand : function(command) {
         this.current = command
         state.updateCommand(command)
+        guideArrow.setDirection(command)
     },
     clearCommands : function() {
         this.current = ''
         this.auto = 'right'
     },
     setCommand : function(command) {
+        guideArrow.setDirection(command)
         this.auto = command
     }
 }

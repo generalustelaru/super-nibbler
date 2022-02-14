@@ -1,12 +1,13 @@
 const modal = {
     isVisible : false,
-    introText: '&lt;&lt; Difficulty Sound &gt;&gt;<br><span class="highlightedText">Arrow keys</span> to maneuver.<br><span class="highlightedText">[Enter]</span> to Start/Pause.<br>Special treat<br>every 10th chow;<br>Special boons to come.<br><div class="button" onclick="modal.display(\'license\')">License Info</div>',
-    continueText: 'You have a game in progress...<br><div class="button" onclick="modal.display(\'cta\')">Continue</div>',
-    pauseText: 'Paused<br>&<br>Game Saved',
+    introText: '&lt;&lt; Difficulty & Sound &gt;&gt;<br><span class="highlightedText">Arrow keys</span> to maneuver.<br><span class="highlightedText">[Enter]</span> to Start/Pause.<br>Your game is saved when paused.<div class="button" onclick="modal.display(\'license\')">License Info</div>',
+    continueText: 'You have a game in progress...<br><div class="button" onclick="modal.display(\'cta\')">Click to Preview</div><br>[Enter] to jump in blind.',
+    pauseText: 'Paused & Saved',
     gameOverText: 'Game Over',
     licenseText: 'This game uses sounds and music licensed under Creative Commons<br>Sound Effects:<br><a href="https://freesound.org/people/LittleRobotSoundFactory/" target="_blank">LittleRobotSoundFactory</a><br>Music:<br><a href="https://freemusicarchive.org/music/Xylo-Ziko" target="_blank">Xylo-Ziko-Subterranean</a><br><div class="button" onclick="modal.display(\'cta\')">Okay</div>',
     ctaText: 'Press Enter',
     dismiss : function() {
+        guideArrow.hide()
         this.isVisible = false
         document.querySelector('.modal').style.visibility = 'hidden'
     },
@@ -14,7 +15,7 @@ const modal = {
         this.isVisible = true
         let element = document.querySelector('.modal')
         if (message != 'intro' && message != 'license') {
-            element.className = 'modal stopped'
+            element.className = 'modal dimmed'
         } else {
             element.className = 'modal'
         }
@@ -22,19 +23,22 @@ const modal = {
         switch (message) {
             case 'pause':
                 contents = this.pauseText
+                guideArrow.place()
                 break
             case 'gameOver':
                 contents = this.gameOverText
                 break
             case 'intro':
-                //console.log('isGameData: ' + state.data.isGameData)
-                (state.data.isGameData ? contents = this.continueText : contents = this.introText)
+                (state.isGameData ? contents = this.continueText : contents = this.introText)
                 break
             case 'license':
                 contents = this.licenseText
                 break
             case 'cta':
                 contents = this.ctaText
+                if (state.isGameData) {
+                    guideArrow.place()
+                }
                 break            
             default:
                 break
@@ -205,4 +209,48 @@ const soundDisplay = {
             }
         })
     }    
+}
+
+const guideArrow = {
+    arrow : document.querySelector('.guideArrow'),
+    turnUp : function(){
+        this.arrow.style.transform = 'rotate(270deg)'
+    },
+    turnRight : function(){
+        this.arrow.style.transform = 'rotate(0deg)'
+    },
+    turnDown : function(){
+        this.arrow.style.transform = 'rotate(90deg)'
+        
+    },
+    turnLeft : function(){
+        this.arrow.style.transform = 'rotate(180deg)'
+    },
+    place : function() {
+        const coords = wurm.getHead()
+        this.arrow.style.top = (coords.top - 35) + 'px'
+        this.arrow.style.left = (coords.left - 35) + 'px'
+        this.arrow.style.visibility = 'visible'
+    },
+    hide : function() {
+        this.arrow.style.visibility = 'hidden'
+    },
+    setDirection : function(command) {
+        switch (command) {
+            case 'up':
+                this.turnUp()
+                break
+            case 'right':
+                this.turnRight()
+                break
+            case 'down':
+                this.turnDown()
+                break
+            case 'left':
+                this.turnLeft()
+                break
+            default:
+                break
+        }
+    }
 }

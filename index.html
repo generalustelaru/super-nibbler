@@ -22,9 +22,12 @@
                 <div class="button" id='normal' onclick="game.setDifficulty('normal')">Normal</div>
                 <div class="button pressedButton" id='easy' onclick="game.setDifficulty('easy')">Easy</div>
                 <div class="button" id='larva' onclick="game.setDifficulty('larva')">Larva</div>
+                <div class="button" onclick="localStorage.clear()">Clear LS</div>
             </div>
         </div>
-        <div class="pen"></div>
+        <div class="pen">
+            <div class="guideArrow"></div>
+        </div>
         <div class="panel" id="rightPanel">
             <div class="panel__controlElement">
                 <div class="button" id='loud' onclick="sounds.setSound('loud')">Loud</div>
@@ -57,7 +60,7 @@
             </div>
         </div>
     </div>
-   
+    <script src="state.js"></script>
     <script src="main.js"></script>
     <script src="commands.js"></script>
     <script src="render.js"></script>

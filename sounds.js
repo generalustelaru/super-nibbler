@@ -21,7 +21,7 @@ const sounds = {
                 break
         }
         soundDisplay.update(option)
-        if (game.isRunning()) {
+        if (!game.isPaused) {
             game.pauseGame()
         }
     },
