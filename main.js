@@ -10,17 +10,17 @@ const game = {
     setDifficulty(option) {
         state.updateDifficulty(option)
         switch (option) {
-            case 'larva':
-                this.frameAt = 300
-                break;
-            case 'easy':
-                this.frameAt = 150
-                break;
             case 'normal':
                 this.frameAt = 75
-                break;
+                break
+            case 'easy':
+                this.frameAt = 150
+                break
+            case 'larva':
+                this.frameAt = 300
+                break
             default:
-                break;
+                break
         }
         difficultyDisplay.update(option)
         if (!this.isPaused) {
@@ -38,6 +38,7 @@ const game = {
         if (state.isGameData) {
             this.continueGame()
         } else {
+            state.clearGameData()
             this.isOver = false
             colorPalette.resetColors()
             colorPalette.rollConfiguration()

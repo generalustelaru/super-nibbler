@@ -59,8 +59,11 @@ const state = {
         //this.data.isGameData = true
         if (this.data.score != 0) {
             this.isGameData = true
+            this.distributeData()
+        } else {
+            this.clearGameData()
         }
-        this.distributeData()
+        //this.distributeData()
     },
     distributeData : function() {
         game.setDifficulty(this.data.difficulty)
